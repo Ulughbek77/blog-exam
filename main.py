@@ -12,12 +12,21 @@ def load_demo_data():
         data = json.load(f)
 
     # Users larni kriting
+    for u in data["users"]:
+        user = User(username=u["username"], email=u["email"])
+        db.add(user)
     db.commit()
 
     # Posts larni kriting
+    for p in data["posts"]:
+        post = Post(title=p["title"], body=p["body"], user_id=p["user_id"])
+        db.add(post)
     db.commit()
 
     # Comments larni kriting
+    for c in data["comments"]:
+        comment = Comment(text=c["text"], iser_id=c["user_id"], post_id=c["post_id"])
+        db.add(comment)
     db.commit()
 
     db.close()
